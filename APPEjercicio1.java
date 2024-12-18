@@ -1,27 +1,39 @@
-package Prueba6TRIM1;
+package Prueba5_Burdallo_Daniel;
 import java.util.*;
 public class APPEjercicio1 {
 	public static void main(String[] args) {
 		var sc = new Scanner(System.in);
 		
 		
-		//------------------------------------
-		System.out.println("Introduzca el numero de palabras que deseas introducir");
-		int numP=sc.nextInt();
-		Ejercicio1[] ejercicio =new Ejercicio1[numP];
-		
-		String palabras;
-		System.out.println("Introduzca la palabra");
-		for(int i=0;i<numP ;i++) {
-			palabras=sc.nextLine();
-			//ejercicio[palabras]=new Ejercicio1[palabras];
-		}
-		
-	}
-	public static void mayor(String palabras) {
-		 int cont=palabras.length();
-		 for(int i=0;i<palabras.length();i++) {
-		
+		  // Leer la frase del teclado
+        System.out.println("Introduce una frase:");
+        String frase = sc.nextLine();
+
+        // Dividir la frase en palabras
+        String[] palabras = frase.split("\\s+");
+
+        // Contar el número de palabras
+        int numeroPalabras = palabras.length;
+
+        // Inicializar variables para la palabra más corta y más larga
+        String palabraMasCorta = palabras[0];
+        String palabraMasLarga = palabras[0];
+
+        for (String palabra : palabras) {
+            if (palabra.length() < palabraMasCorta.length()) {
+                palabraMasCorta = palabra;
+            }
+            if (palabra.length() > palabraMasLarga.length()) {
+                palabraMasLarga = palabra;
+            }
+        }
+
+        // Imprimir los resultados
+        System.out.println("Número de palabras: " + numeroPalabras);
+        System.out.println("Palabra más corta: " + palabraMasCorta + " (" + palabraMasCorta.length() + " caracteres)");
+        System.out.println("Palabra más larga: " + palabraMasLarga + " (" + palabraMasLarga.length() + " caracteres)");
+    }
+}
 			 
 			 
 		 }

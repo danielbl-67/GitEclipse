@@ -1,78 +1,94 @@
-package Prueba6TRIM1;
+package Prueba5_Burdallo_Daniel;
 import java.util.*;
 import Boletin9.Incidencias;
 public class APPEjercicio2 {
 	public static void main(String[] args) {
 		var sc = new Scanner(System.in);
-		Ejercicio2[] ejer= new Ejercicio2[3];
-		
-		System.out.println("Introduzca acontinuacion su opcion");
-		menu();
-		System.out.println("------------");
-		System.out.println();
-		int opcion=sc.nextInt();
-		switch(opcion){
-		case 1:
-			entradasLibre();break;
-		case 2:
-			venta();break;
-		case 3: System.out.println("Saliendo del programa");break;
-		}
-		
-	}
+		int opcion;
 
-	//-----------------------------
-	public static void menu() {
-		System.out.println("1-Mostrar número de entradas libres");
-		System.out.println("2-Vender entradas");
-		System.out.println("3-Salir");
-	}
-	//----------------------------
-	public static void entradasLibre() {
-		String zona;
-		var sc = new Scanner(System.in);
-		System.out.println("Introduzca la zona deseada");
-		System.out.println("1-Principal");
-		System.out.println("2-Platea");
-		System.out.println("3-VIP");
-		System.out.println("4-Salir");
-		int opcion=sc.nextInt();
-		switch(opcion) {
-		case 1:System.out.println("La zona PRINCIPAL tiene "+"entradas libres");break;
-		case 2:System.out.println("La zona PLATEA tiene "+"entradas libres");break;
-		case 3:System.out.println("La zona VIP tiene "+"entradas libres");break;
-		case 4:System.out.println("Saliendo del programa");break;
-		
-		}
-	}
-	//-------------------------------
-		public static void zonas(String zona,int numeroEntrada) {
-			if(zona.toLowerCase()=="principal") {
-				numeroEntrada=1000;
-			}else if(zona.toLowerCase()=="platea") {
-				numeroEntrada=200;
-			}else {
-				numeroEntrada=25;
-			}
-		}
-	//--------------------------------
-	public static void venta() {
-		var sc = new Scanner(System.in);
-		System.out.println("Que zona comprar entrada");
-		System.out.println("1-Principal");
-		System.out.println("2-Platea");
-		System.out.println("3-VIP");
-		System.out.println("4-Salir");
-		int opcion=sc.nextInt();
-		System.out.println("Cuantas entradas quieres");
-		int opcion2=sc.nextInt();
-		switch(opcion) {
-		case 1:System.out.println("Ahora quedan");break;
-		case 2:System.out.println("Ahora quedan");break;
-		case 3:System.out.println("Ahora quedan");break;
-		case 4:System.out.println("Saliendo del programa");break;
-		}
-		
-		
-	}
+        do {
+            // Mostrar menú
+            System.out.println("Menú:");
+            System.out.println("1. Mostrar número de entradas libres");
+            System.out.println("2. Vender entradas");
+            System.out.println("3. Salir");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    mostrarEntradasLibres();
+                    break;
+                case 2:
+                    venderEntradas();
+                    break;
+                case 3:
+                    System.out.println("Saliendo del programa...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, elige una opción del 1 al 3.");
+            }
+        } while (opcion != 3);
+
+        sc.close();
+    }
+
+    // Método para mostrar el número de entradas libres
+    private static void mostrarEntradasLibres() {
+        System.out.println("Entradas libres:");
+        System.out.println("Zona Principal: " + entradaPricipal);
+        System.out.println("Zona Platea: " + entradaPlatea);
+        System.out.println("Zona VIP: " + entradaVip);
+    }
+
+    // Método para vender entradas
+    private static void venderEntradas(Scanner scanner) {
+        System.out.println("Zonas disponibles:");
+        System.out.println("1. Zona Principal");
+        System.out.println("2. Zona Platea");
+        System.out.println("3. Zona VIP");
+        System.out.print("Elige una zona: ");
+        int zona = scanner.nextInt();
+
+        System.out.print("¿Cuántas entradas quieres? ");
+        int cantidad = scanner.nextInt();
+
+        switch (zona) {
+            case 1:
+                venderEntradasZona("Principal", cantidad, entradasPrincipal, CAPACIDAD_PRINCIPAL);
+                break;
+            case 2:
+                venderEntradasZona("Platea", cantidad, entradasPlatea, CAPACIDAD_PLATEA);
+                break;
+            case 3:
+                venderEntradasZona("VIP", cantidad, entradasVip, CAPACIDAD_VIP);
+                break;
+            default:
+                System.out.println("Zona no válida. Por favor, elige una zona del 1 al 3.");
+        }
+    }
+
+    // Método auxiliar para vender entradas en una zona específica
+    private static void venderEntradasZona(String nombreZona, int cantidad, int entradasDisponibles, int capacidadMaxima) {
+        if (cantidad <= 0) {
+            System.out.println("La cantidad de entradas debe ser mayor que cero.");
+            return;
+        }
+
+        if (cantidad > entradasDisponibles) {
+            System.out.println("No hay suficientes entradas disponibles en la zona " + nombreZona + ". Entradas disponibles: " + entradasDisponibles);
+        } else {
+            System.out.println("Vendidas " + cantidad + " entradas en la zona " + nombreZona + ".");
+            switch (nombreZona) {
+                case "Principal":
+                    entradasPrincipal -= cantidad;
+                    break;
+                case "Platea":
+                    entradasPlatea -= cantidad;
+                    break;
+                case "VIP":
+                    entradasVip -= cantidad;
+                    break;
+            }
+        }
 }
