@@ -1,4 +1,4 @@
-package Prueba6TRIM1;
+package Prueba5_Burdallo_Daniel;
 public class Ejercicio1 {
 
 	private String palabras;
